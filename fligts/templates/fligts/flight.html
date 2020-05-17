@@ -1,0 +1,40 @@
+{% extends "fligts/base.html" %}
+{% block title %}
+Flight {{ flight.id }}
+{% endblock %}
+{% block body %}
+<h1 align="center">This is my Very First Project on Django</h1>
+<h2 align="center">ANJALI AIRLINES</h2>
+<h3 align="center"> FLIGHT {{ flight.id }} </h3>
+<ul>
+    <li > Origin{{flight.origin}}</li>
+    <li > Destination {{flight.destination}}</li>
+</ul>
+<h2 > Passengers </h2>
+<ul>
+    {% for passenger in passengers %}
+    <li >{{ passenger }}</li>
+    {% empty %}
+    <li > No Passengers. </li>
+    {% endfor %}
+</ul>
+<hr>
+<h2> Add a Passenger </h2>
+{% if non_passengers %}
+<form action ="{% url 'book' flight.id %}" method="post">
+    {% csrf_token %}
+    <select name = "passenger">
+        {% for passenger in non_passengers %}
+        <option value = "{{ passenger.id}}"> {{ passenger }}</option>
+        {% endfor %}
+        </select>
+    <input type = "submit" value="Book Flight"/>
+</form>
+{% else %}
+<div> No passengers to add. </div>
+{% endif %}
+
+<li >
+    <a href="{% url 'index' %}"> Back to Full listing </a>
+</li>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "fligts/base.html" %}
+{% block title %}
+Flight
+{% endblock %}
+{% block body %}
+<h1 align="center">This is my Very First Project on Django</h1>
+<h2 align="center">ANJALI AIRLINES</h2>
+<h3 align="center"> FLIGHTS </h3>
+<ul>
+    {% for flight in fligts %}
+    <li>
+        <a href="{% url 'flight' flight.id %}">{{flight}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
